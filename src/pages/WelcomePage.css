@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&display=swap');
+
+.welcome-content {
+  text-align: center;
+  color: #331f02;
+  font-family: 'Poppins', sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: rgba(255, 250, 205, 0.8);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.game-title {
+  font-family: 'Bangers', cursive;
+  font-size: 5rem;
+  color: #ff8c00;
+  text-shadow: 3px 3px 0 #331f02, -1px -1px 0 #331f02, 1px -1px 0 #331f02, -1px 1px 0 #331f02, 1px 1px 0 #331f02;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.game-description p {
+  font-size: 1.2rem;
+  color: #6b4f1d;
+  margin-bottom: 0.7rem;
+  line-height: 1.5;
+}
+/* Buttons container */
+.buttons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+/* Button styling */
+button {
+  font-family: 'Poppins', sans-serif;
+  padding: 1.5rem 3rem;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  border-radius: 15px;
+  min-width: 200px;
+  height: 60px;
+  text-transform: uppercase;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Login Button Styling */
+button.login {
+  background-color: #0b3d0b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+button.login i {
+  font-size: 1.5rem;
+}
+
+button.login:hover {
+  background-color: #8ae08e; /* Lighter blue on hover */
+  color: #000;
+}
+
+/* Register Button Styling */
+button.register {
+  background-color: #990000; /* Green background */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+button.register i {
+  font-size: 1.5rem;
+}
+
+button.register:hover {
+  background-color: #f37d7d; /* Lighter green on hover */
+  color: #000;
+}
+
+/* Play as Guest Button Styling */
+button.guest {
+  background-color: #de8901; /* Yellow background */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+button.guest i {
+  font-size: 1.5rem;
+}
+
+button.guest:hover {
+  background-color: #ffe680; /* Lighter yellow on hover */
+  color: #000;
+}

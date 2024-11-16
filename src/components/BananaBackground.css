@@ -1,0 +1,76 @@
+.page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, #e2cf8c 0%, #ede5c0 100%);
+  overflow: hidden;
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(3px 3px at 20px 30px, #848482, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 40px 70px, #666664, rgba(0,0,0,0)),
+    radial-gradient(3px 3px at 50px 160px, #848482, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 40px, #666664, rgba(0,0,0,0)),
+    radial-gradient(3px 3px at 130px 80px, #848482, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 160px 120px, #666664, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}
+
+.banana-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.banana {
+  position: absolute;
+  background-image: url("/banana.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  animation: float 15s linear infinite;
+  left: -50px; /* Start off-screen to the left */
+}
+
+@keyframes float {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px)) rotate(360deg);
+  }
+}
+
+.page-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.user-dropdown-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}

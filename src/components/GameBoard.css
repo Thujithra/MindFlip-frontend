@@ -1,0 +1,51 @@
+.grid {
+  display: grid;
+  grid-gap: 10px;
+  justify-content: center;
+  margin: auto;
+  padding: 20px;
+}
+
+.game-board {
+  text-align: center;
+  margin-bottom: 20px; /* Added space below the board for the button */
+}
+
+.score {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  margin-top: 5px;
+}
+
+.game-status {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.5em;
+  color: #4caf50;
+}
+
+button.playbutton {
+  background-color: #0b3d0b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  margin: 10px auto; /* Centering and adding space */
+  padding: 10px 15px; /* Adjusted padding for better visibility */
+  border-radius: 10px; /* Rounded corners for aesthetic */
+  font-size: 1rem; /* Adjusted font size */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for visibility */
+  cursor: pointer;
+}
+
+button.playbutton i {
+  font-size: 1rem;
+}
+
+button.playbutton:hover {
+  background-color: #8ae08e; /* Lighter green on hover */
+  color: #000;
+}
