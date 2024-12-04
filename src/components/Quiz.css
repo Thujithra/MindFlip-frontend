@@ -1,15 +1,16 @@
 .quiz-container {
+  position: relative; /* Required for the close button to position correctly */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   padding: 20px;
-  background-color: #fff; /* Light background for contrast */
+  background-color: #fff;
   border-radius: 12px;
-  /* box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); */
-  max-width: 600px; /* Limit width for better control */
+  max-width: 600px;
   margin: auto;
 }
+
 
 .quiz-image {
   /* width: 80%; Make the image responsive */
@@ -57,7 +58,8 @@ button {
 }
 
 button:hover {
-  background-color: #2980b9; /* Darker blue on hover */
+  background-color: #0b3d0b; /* Darker blue on hover */
+  color: white;
   transform: translateY(-2px); /* Lift effect on hover */
 }
 
@@ -98,3 +100,23 @@ button:focus {
   text-align: center;
 }
 
+.close-button {
+  position: absolute; /* Position relative to the quiz-container */
+  top: 10px; /* Distance from the top edge of the container */
+  right: 10px; /* Distance from the right edge of the container */
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #000;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 1; /* Ensure it stays above other elements */
+}
+
+.close-button i {
+  font-size: 1.5rem;
+}
+
+.close-button:hover {
+  color: #1d4f3f;
+}

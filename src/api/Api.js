@@ -13,12 +13,12 @@ export const fetchQuestionAnswerPair = async () => {
   }
 };
 
-
 export const registerUser = async (userData) => {
   try {
     const response = await axios.post(`${API_URL}auth/register`, userData);
-    console.error(userData);
-    return response.data;
+    // console.error(userData);
+    // Cookies.set("authtoken", response.token);
+    return response.token;
   } catch (error) {
     throw error.response.data; // Forward the error message to the UI
   }
@@ -27,8 +27,23 @@ export const registerUser = async (userData) => {
 export const loginUser = async (userData) => {
   try {
     const response = await axios.post(`${API_URL}auth/login`, userData);
-    return response.data;
+    localStorage.setItem("authToken", response.data.token); // return response.data;
   } catch (error) {
     throw error.response.data;
   }
+};
+
+export const updateScore = async (level, score) => {
+  console.error(level, score);
+
+  const token = localStorage.getItem("authToken");
+  console.log(token);
+
+  console.error(token);
+  const response = await axios.post(
+    `${API_URL}game/score`,
+    { level, score },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  return response.data;
 };

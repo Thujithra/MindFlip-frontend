@@ -104,6 +104,10 @@ button.leaderboard {
     font-weight: bold;
     width: 80%; /* Increased width */
     max-width: 300px;
+    display: flex; /* Added flex */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    text-align: center; /* Ensure text is centered */
 }
 button.leaderboard:hover {
     background-color: #fddb77; /* Lighter yellow on hover */

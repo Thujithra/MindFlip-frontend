@@ -7,13 +7,13 @@ const BananaBackground = ({ children, user, onSignOut }) => {
     return [...Array(numBananas)].map((_, index) => {
       const topPosition = Math.random() * 100;
       const delay = (index * 0.25) + "s";
-      const size = 30 + Math.random() * 20; // Random size between 30px and 50px
+      const size = 30 + Math.random() * 30; // Random size between 30px and 50px
 
       return { topPosition, delay, size };
     });
   };
 
-  const bananaStyles = generateBananaStyles(40);
+  const bananaStyles = generateBananaStyles(25);
 
   return (
     <div className="page">

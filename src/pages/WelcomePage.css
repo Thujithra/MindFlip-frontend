@@ -116,3 +116,30 @@ button.guest:hover {
   background-color: #ffe680; /* Lighter yellow on hover */
   color: #000;
 }
+
+
+/* Quote Section Styling */
+.quote-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #fff8e7;
+  border: 1px solid #ffd966;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  color: #6b4f1d;
+  font-family: 'Poppins', sans-serif;
+}
+
+.quote {
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.quote footer {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  text-align: right;
+  color: #ff8c00;
+}

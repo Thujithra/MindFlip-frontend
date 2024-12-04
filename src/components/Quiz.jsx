@@ -3,7 +3,7 @@ import { fetchQuestionAnswerPair } from "../api/Api";
 import Message from "../components/Message";
 import "./Quiz.css";
 
-function QuizComponent({ closeQuiz }) {
+function QuizComponent({ onCorrectAnswer, onWrongAnswer, onCloseQuiz }) {
   const [questionData, setQuestionData] = useState(null);
   const [userAnswer, setUserAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
@@ -28,33 +28,41 @@ function QuizComponent({ closeQuiz }) {
       setFeedback("Correct!");
       setMessage("Correct answer!");
       setShowMessage(true);
-      closeQuiz(); // Close the quiz modal when the answer is correct
+      onCorrectAnswer(); // Call callback for correct answer
     } else {
       setFeedback("Incorrect. Try again!");
-      setMessage("Answer is incorrect! Please try again.");
+      setMessage("Answer is incorrect! Restarting game...");
       setShowMessage(true);
+      onWrongAnswer(); // Call callback for wrong answer
     }
   };
 
   const handleCloseMessage = () => {
     setShowMessage(false);
-    loadQuestion();
+    // Close the quiz and go back to the game page
+    onCloseQuiz(); // Ensure the quiz closes and game page shows again
   };
-
-  if (!questionData) {
-    return <div>Loading question...</div>;
-  }
 
   return (
     <div className="quiz-container">
+      <div className="close-button" onClick={onCloseQuiz}>
+        <i className="fas fa-times"></i>
+      </div>
       <h2>Quiz Question</h2>
-      <img src={questionData.question} alt="Quiz" className="quiz-image" />
+      {questionData && (
+        <img src={questionData.question} alt="Quiz" className="quiz-image" />
+      )}
       <div>
         <input
           type="number"
           placeholder="Your answer"
           value={userAnswer}
-          onChange={(e) => setUserAnswer(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (value === "" || (/^[0-9]$/.test(value))) {
+              setUserAnswer(value);
+            }
+          }}
         />
         <button onClick={handleAnswerSubmit}>Submit Answer</button>
       </div>

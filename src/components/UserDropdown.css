@@ -31,39 +31,41 @@
     position: absolute;
     top: 50px;
     right: 0;
-    background-color: #FFFBEB; /* Light yellow background */
-    border: 2px solid #CA8A04;
+    background-color: #FFFBEB; /* Light yellow background */    border: 2px solid #CA8A04; /* Darker yellow border */
     border-radius: 8px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 1001;
 }
 
 .user-name {
-    color: #854D0E;
+    color: #854D0E; /* Dark yellow/brown */
     font-weight: bold;
-    margin-bottom: 10px;
+    margin: 0;
     text-align: center;
 }
 
 .sign-out-button {
     width: 100%;
-    padding: 8px;
+    padding: 8px 12px;
     font-size: 14px;
-    background-color: #CA8A04; /* Darker yellow */
-    color: #FFFBEB; /* Light yellow text */
+    background-color: #CA8A04;
+    color: #FFFBEB;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.sign-out-button:hover:not(:disabled) {
-    background-color: #854D0E; /* Even darker yellow on hover */
+.sign-out-button:hover {
+    background-color: #A16207;
 }
 
-.sign-out-button:disabled {
-    background-color: #D1D5DB; /* Gray for disabled state */
-    cursor: not-allowed;
-    opacity: 0.7;
+.sign-out-button:hover:not(:disabled) {
+    background-color: #854D0E; /* Even darker yellow on hover */
 }

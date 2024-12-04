@@ -7,50 +7,39 @@ const generateCards = (pairCount) => {
     { length: 17 },
     (_, index) => `/cardbanana/${index + 1}.jpg`
   );
-  const selectedImages = [];
+  const selectedImages = new Set();
 
-  while (selectedImages.length < pairCount) {
-    const randomImage = images[Math.floor(Math.random() * images.length)];
-    if (!selectedImages.includes(randomImage)) {
-      selectedImages.push(randomImage);
-    }
+  while (selectedImages.size < pairCount) {
+    selectedImages.add(images[Math.floor(Math.random() * images.length)]);
   }
 
-  const cards = [];
-  selectedImages.forEach((image, index) => {
-    const pair = { id: `pair-${index}`, solution: index, image: image };
-    cards.push({ ...pair, id: `question-${index}`, type: "question" });
-    cards.push({ ...pair, id: `answer-${index}`, type: "answer" });
-  });
+  const cards = Array.from(selectedImages).flatMap((image, index) => [
+    { id: `question-${index}`, solution: index, image, type: "question" },
+    { id: `answer-${index}`, solution: index, image, type: "answer" },
+  ]);
 
   return cards.sort(() => Math.random() - 0.5);
 };
 
-const GameBoard = ({ pairCount }) => {
+const GameBoard = ({ pairCount, gameState, updateGameState, showQuiz }) => {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [matchedPairs, setMatchedPairs] = useState(0);
   const [isChecking, setIsChecking] = useState(false);
-
-  // Calculate the number of columns dynamically
-  const calculateColumns = (pairs) => {
-    if (pairs <= 6) return 4; // Easy
-    if (pairs <= 8) return 4; // Medium
-    return 5; // Hard
-  };
-
-  const columns = calculateColumns(pairCount);
+  const [gameWon, setGameWon] = useState(false);
 
   useEffect(() => {
     setCards(generateCards(pairCount));
-    setMatchedPairs(0);
+    setMatchedPairs(gameState.matchedPairs || 0);
   }, [pairCount]);
 
   const handleClick = (clickedCard) => {
     if (
       isChecking ||
       flippedCards.some((card) => card.id === clickedCard.id) ||
-      clickedCard.matched
+      clickedCard.matched ||
+      showQuiz ||
+      gameWon
     )
       return;
 
@@ -59,9 +48,11 @@ const GameBoard = ({ pairCount }) => {
 
     if (newFlippedCards.length === 2) {
       setIsChecking(true);
+      const [firstCard, secondCard] = newFlippedCards;
+
       if (
-        newFlippedCards[0].solution === newFlippedCards[1].solution &&
-        newFlippedCards[0].type !== newFlippedCards[1].type
+        firstCard.solution === secondCard.solution &&
+        firstCard.type !== secondCard.type
       ) {
         setMatchedPairs((prev) => prev + 1);
         setCards((prevCards) =>
@@ -71,7 +62,9 @@ const GameBoard = ({ pairCount }) => {
               : card
           )
         );
+        updateGameState(matchedPairs + 1);
       }
+
       setTimeout(() => {
         setFlippedCards([]);
         setIsChecking(false);
@@ -79,39 +72,50 @@ const GameBoard = ({ pairCount }) => {
     }
   };
 
+  useEffect(() => {
+    if (matchedPairs === pairCount) {
+      setGameWon(true);
+    }
+  }, [matchedPairs, pairCount]);
+
+  const handlePlayAgain = () => {
+    setCards(generateCards(pairCount));
+    setGameWon(false);
+  };
+
   return (
     <div className="game-board">
-      <div
-        className="grid"
-        style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
-        {" "}
-        {cards.map((card) => (
-          <Card
-            key={card.id}
-            card={card}
-            onClick={handleClick}
-            isFlipped={
-              flippedCards.some((flippedCard) => flippedCard.id === card.id) ||
-              card.matched
-            }
-          />
-        ))}{" "}
-      </div>{" "}
-      {matchedPairs === pairCount && (
-        <div className="game-status">
-          <p> 🎉You Win!🎉 </p>{" "}
-        </div>
-      )}{" "}
-      <div className="game-controls">
-        <p className="score"> 🍌Score: {matchedPairs} </p>{" "}
-        {matchedPairs === pairCount && (
-          <button
-            className="playbutton"
-            onClick={() => setCards(generateCards(pairCount))}>
-            <i class="fa-regular fa-circle-play"></i>Play Again{" "}
+      {gameWon ? (
+        <div className="game-over">
+          <p>🎉 You Win! 🎉</p>
+          <p className="score">🍌 Score: {matchedPairs}</p>
+          <button onClick={handlePlayAgain} className="play-again-btn">
+            Play Again
           </button>
-        )}{" "}
-      </div>{" "}
+        </div>
+      ) : (
+        <>
+          <div
+            className="grid"
+            style={{
+              gridTemplateColumns: `repeat(${Math.ceil(Math.sqrt(cards.length))}, 1fr)`,
+            }}
+          >
+            {cards.map((card) => (
+              <Card
+                key={card.id}
+                card={card}
+                onClick={handleClick}
+                isFlipped={flippedCards.includes(card) || card.matched}
+                isMatched={card.matched}
+              />
+            ))}
+          </div>
+          <div className="game-controls">
+            <p className="score">🍌 Score: {matchedPairs}</p>
+          </div>
+        </>
+      )}
     </div>
   );
 };

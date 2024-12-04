@@ -16,6 +16,28 @@
   padding: 2rem;
   margin-top: 2rem;
   position: relative;
+  overflow: visible; /* Prevents clipping */
+}
+
+/* Close Button Styling */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #000;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-button i {
+  font-size: 1.5rem;
+}
+
+.close-button:hover {
+  color: #1d4f3f;
 }
 
 .auth-container h2 {
@@ -80,26 +102,5 @@
 }
 
 .auth-container .switch-link a:hover {
-  color: #1d4f3f;
-}
-
-/* Close Button Styling */
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: #000;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.close-button i {
-  font-size: 1.5rem;
-}
-
-.close-button:hover {
   color: #1d4f3f;
 }
